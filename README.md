@@ -12,8 +12,10 @@ git clone https://github.com/6hl/cpp-cv.git
 ```
 
 ### Setup repo
+
+Adjust `cfg/.env` for requested configuration. Make sure to set `OPENCV_PATH`
 ```
-./build.sh
-./weights/build_weights.sh <ENV_TYPE> <MODEL_TYPE> <HEIGHT> <WIDTH>
+make build
+make weights
+make run
 ```
-> where ENV_TYPE is `conda` or `venv`, MODEL_TYPE is any yolov5 variant, and HEIGHT/WIDTH are image input height and width.
