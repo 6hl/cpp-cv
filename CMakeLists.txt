@@ -5,6 +5,15 @@ find_package(OpenCV REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenCV_CXX_FLAGS}")
 
 add_executable(detection main.cpp)
-target_include_directories(detection PRIVATE src/)
+
+add_library(
+    src 
+    src/model.cpp
+    src/detector.cpp
+)
+
+target_include_directories(detection PUBLIC src/)
+target_link_libraries(src "${OpenCV_LIBS}")
 target_link_libraries(detection "${OpenCV_LIBS}")
+target_link_libraries(detection src)
 set_property(TARGET detection PROPERTY CXX_STANDARD 14)
