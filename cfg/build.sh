@@ -7,5 +7,5 @@ if [ ! -d $SCRIPT_DIR/../build ]; then
     mkdir build
 fi
 cd build
-cmake -DCMAKE_PREFIX_PATH=/home/bliggett/opencv-4.x ..
+cmake -DCMAKE_PREFIX_PATH=$OPENCV_PATH ..
 cmake --build . --config Release
