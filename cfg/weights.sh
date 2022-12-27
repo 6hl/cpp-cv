@@ -20,8 +20,8 @@ if [ $ENV_TYPE == "conda" ]; then
         conda activate yolo-env
         conda install -y pip
         pip3 install -r requirements.txt
+        # pip3 install torch==1.11 # Torch <= 1.11 needed for onnx conversion
     fi
-    
 elif [ $ENV_TYPE == "venv" ]; then
     echo venv not setup
     exit 1
@@ -29,8 +29,8 @@ else
     echo ENV_TYPE must be `conda` or `venv`
     exit 1
 fi
-# If opencv error: sudo apt-get install libgl1
 cd yolov5
-# python3 export.py --weights $MODEL_TYPE.pt --img $HEIGHT $WIDTH --batch 1 --include "onnx" --simplify
-python3 export.py --weights $MODEL_TYPE.pt --include "onnx"
+# If opencv error: sudo apt-get install libgl1
+python3 export.py --weights $MODEL_TYPE.pt --img $HEIGHT $WIDTH --batch 1 --include "onnx" --simplify --opset 12
+# python3 export.py --weights $MODEL_TYPE.pt --include "onnx" #--simplify
 mv $MODEL_TYPE.onnx $PWD/..

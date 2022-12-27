@@ -1,7 +1,9 @@
 #!/bin/bash
 export MAKEFLAGS=--no-print-directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-if [ ! -d $SCRIPT_DIR/.. ]; then
+source $SCRIPT_DIR/.env
+
+if [ ! -d $SCRIPT_DIR/../build ]; then
     mkdir build
 fi
 cd build
