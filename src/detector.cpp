@@ -1,6 +1,6 @@
 #include "detector.hpp"
 
-cv::Mat format_img(const cv::Mat &img)
+cv::Mat format_img(const cv::Mat& img)
 {
     int col = img.cols;
     int row = img.rows;
@@ -30,7 +30,7 @@ void nms(std::vector<cv::Rect> bboxs, std::vector<float> confidences, std::vecto
 {
     std::vector<int> nms_result;
     cv::dnn::NMSBoxes(bboxs, confidences, SCORE_THRESH, NMS_THRESH, nms_result);
-    for (int i = 0; i < nms_result.size(); i++) {
+    for (int i = 0; i < nms_result.size(); ++i) {
         int idx = nms_result[i];
         Object result;
         result.class_id = class_ids[idx];
@@ -40,14 +40,13 @@ void nms(std::vector<cv::Rect> bboxs, std::vector<float> confidences, std::vecto
     }
 }
 
-void detect(cv::Mat &img, Model& model, std::vector<Object>& output, const std::vector<std::string>& classNames)
+void detect(cv::Mat& img, Model* model, std::vector<Object>& output, const std::vector<std::string>& classNames)
 {
     cv::Mat blob;
     auto conv_img = format_img(img);
-    model.net.setInput(conv_img);
+    model->net.setInput(conv_img);
     std::vector<cv::Mat> m_output;
-    model.net.forward(m_output, model.net.getUnconnectedOutLayersNames());
-
+    model->net.forward(m_output, model->net.getUnconnectedOutLayersNames());
 
     float x_f = img.cols / 640.;
     float y_f = img.rows / 640.;
@@ -69,15 +68,16 @@ void detect(cv::Mat &img, Model& model, std::vector<Object>& output, const std::
             cv::Mat scores(1, classNames.size(), CV_32FC1, classes_scores);
             cv::Point class_id;
             double max_class_score;
-            minMaxLoc(scores, 0, &max_class_score, 0, &class_id);
+            cv::minMaxLoc(scores, 0, &max_class_score, 0, &class_id);
 
             if (max_class_score > 0.2) // SCORE_THRESH
             {
-                confidences.push_back(class_id.x);
+                confidences.push_back(confidence);
+                class_ids.push_back(class_id.x);
                 bboxs.push_back(to_yolo(data, x_f, y_f));
             }
         }
-        data += 85;
+        data += 85;  
     }
     nms(bboxs, confidences, class_ids, 0.4, .4, output);
 }
