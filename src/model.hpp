@@ -1,5 +1,5 @@
-#ifndef _MODEL_
-#define _MODEL_
+#ifndef _CPP_CV_MODEL_
+#define _CPP_CV_MODEL_
 
 #include <opencv2/opencv.hpp>
 #include <string>
