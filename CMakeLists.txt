@@ -11,6 +11,7 @@ add_library(
     src 
     src/model.cpp
     src/detector.cpp
+    src/utils.cpp
 )
 
 target_include_directories(detection PUBLIC src/)
