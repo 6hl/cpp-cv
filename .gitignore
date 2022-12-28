@@ -1,7 +1,9 @@
 # Repo specific
 build
+test/runs
 weights/yolov5
 *.onnx
+weights/coco_classes.txt
 
 # Prerequisites
 *.d
