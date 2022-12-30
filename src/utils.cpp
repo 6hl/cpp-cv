@@ -16,3 +16,17 @@ cv::Mat plot_bboxs(cv::Mat base_image, std::vector<Object> detections, std::vect
     }
     return result_image;
 }
+
+Dataset::Dataset(std::string dataset_directory)
+    : fnames(dataset_directory),
+      length(std::distance(std::filesystem::directory_iterator(dataset_directory), 
+                           std::filesystem::directory_iterator{}))
+    {
+    }
+
+cv::Mat Dataset::sample()
+{
+    cv::Mat image = cv::imread((*fnames).path(), cv::IMREAD_COLOR);
+    fnames++;
+    return image;
+}
