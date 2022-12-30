@@ -1,6 +1,10 @@
 #ifndef _CPP_CV_DETECTOR_
 #define _CPP_CV_DETECTOR_
 
+#include <opencv2/opencv.hpp>
+#include <string>
+#include <vector>
+
 #include "model.hpp"
 
 struct Object
