@@ -11,15 +11,20 @@
 
 const std::vector<cv::Scalar> COLORS = {cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0), cv::Scalar(0, 255, 255), cv::Scalar(255, 0, 0)};
 cv::Mat plot_bboxs(cv::Mat base_image, std::vector<Object> detections, std::vector<std::string> class_list);
+void save_plot(cv::Mat image, std::string path);
 
 class Dataset
 {
     public:
         Dataset(std::string dataset_directory);
         cv::Mat sample();
-        int length;
+        int length();
+        std::string file_name();
+        
     private:
         std::filesystem::directory_iterator fnames;
+        int ds_length;
+        std::string current_fname;
 };
 
 #endif
