@@ -9,7 +9,8 @@
 
 #include "detector.hpp"
 
-const std::vector<cv::Scalar> COLORS = {cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0), cv::Scalar(0, 255, 255), cv::Scalar(255, 0, 0)};
+const std::vector<cv::Scalar> COLORS = {
+    cv::Scalar(240, 80, 80), cv::Scalar(0, 255, 255), cv::Scalar(0, 0, 255)};
 cv::Mat plot_bboxs(cv::Mat base_image, std::vector<Object> detections, std::vector<std::string> class_list);
 void save_plot(cv::Mat image, std::string path);
 
