@@ -42,4 +42,4 @@ cv::Mat Dataset::sample()
 }
 
 int Dataset::length(){return ds_length;}
-std::string Dataset::file_name(){return current_fname;}
+std::string Dataset::filename(){return current_fname;}
