@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-source $SCRIPT_DIR/.env
+source $SCRIPT_DIR/.env.setup
 cd $SCRIPT_DIR/../weights
 
 if [ ! -d $PWD/yolov5 ]; then

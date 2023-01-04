@@ -20,7 +20,7 @@ class Dataset
         Dataset(std::string dataset_directory);
         cv::Mat sample();
         int length();
-        std::string file_name();
+        std::string filename();
         
     private:
         std::filesystem::directory_iterator fnames;
