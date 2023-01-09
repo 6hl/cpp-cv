@@ -13,9 +13,15 @@ git clone https://github.com/6hl/cpp-cv.git
 
 ### Setup repo
 
-Adjust `cfg/.env` for requested configuration. Make sure to set `OPENCV_PATH`
+Adjust `cfg/.env.setup` for requested configuration. Make sure to set `OPENCV_PATH`
 ```
 make build
 make weights
-make run
+```  
+
+Then for evaluation on folder of images
 ```
+make eval
+```  
+
+* TODO: setup live inference with `make run`

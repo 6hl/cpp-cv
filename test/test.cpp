@@ -1,4 +1,3 @@
-#include "detector.hpp"
 #include "utils.hpp"
 #include <sstream>
 
@@ -12,13 +11,10 @@ int main(int argc, char** argv){
 
     Model* net = new Model(MODEL_PATH, CLASSES_PATH, false);
     cv::Mat image = cv::imread(TEST_IMAGE_PATH, cv::IMREAD_COLOR);
-    std::vector<Object> detections;
-    detect(image, net, detections, net->class_list);
-
+    auto detections = detect(image, net, net->class_list);
     auto new_image = plot_bboxs(image, detections, net->class_list);
-    
-    image_save_path << RUN_DIR << "/" << "res.jpg";
-    std::cout << image_save_path.str() << std::endl;
-    cv::imwrite(image_save_path.str(), new_image);
+    image_save_path << RUN_DIR << "/" << "test_image.jpg";
+    save_plot(new_image, image_save_path.str());
+    delete net;
     return 0;
 }
